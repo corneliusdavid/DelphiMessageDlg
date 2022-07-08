@@ -3,12 +3,12 @@ unit Unit1;
 interface
 
 uses
-  {$IF CompilerVersion < 22}
+  {$IF CompilerVersion <= 22}
   Windows, Messages, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, StdCtrls;
   {$ELSE}
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Classes, Controls, StdCtrls;
   {$IFEND}
 
 type

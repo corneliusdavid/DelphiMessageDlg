@@ -1,11 +1,11 @@
 program MessageDlgTests;
 
 uses
-  {$IF CompilerVersion < 22}
+  {$IF CompilerVersion <= 22}
   Forms,
   {$ELSE}
   Vcl.Forms,
-  {$ENDIF}
+  {$IFEND}
   Unit1 in 'Unit1.pas' {Form1};
 
 {$R *.res}
