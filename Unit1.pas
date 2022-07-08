@@ -8,7 +8,7 @@ uses
   Controls, Forms, Dialogs, StdCtrls;
   {$ELSE}
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Classes, Controls, StdCtrls;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
   {$IFEND}
 
 type
@@ -18,6 +18,7 @@ type
     btnWarning: TButton;
     btnError: TButton;
     btnShowAll: TButton;
+    chkUseLatestDlgs: TCheckBox;
     procedure btnConfirmClick(Sender: TObject);
     procedure btnInformationClick(Sender: TObject);
     procedure btnWarningClick(Sender: TObject);
@@ -93,6 +94,8 @@ end;
 
 procedure TForm1.ShowConfirmation;
 begin
+  UseLatestCommonDialogs := not chkUseLatestDlgs.Checked;
+
   MessageDlg('This is a confirmation dialog. Does it look OK?',
              TMsgDlgType.mtConfirmation,
              [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
