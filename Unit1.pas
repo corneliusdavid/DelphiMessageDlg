@@ -33,8 +33,10 @@ implementation
 
 {$R *.dfm}
 
+{$IF CompilerVersion >= 28}
 uses
   System.Threading;
+{$IFEND}
 
 procedure TForm1.btnConfirmClick(Sender: TObject);
 begin
@@ -52,12 +54,12 @@ begin
 end;
 
 procedure TForm1.btnShowAllClick(Sender: TObject);
-{$IF CompilerVersion >= 21}
+{$IF CompilerVersion >= 28}
 var
   dlgTasks: ITask;
-{$ENDIF}
+{$IFEND}
 begin
-{$IF CompilerVersion >= 21}
+{$IF CompilerVersion >= 28}
   dlgTasks := TTask.Create(ShowInformation);
   dlgTasks.Start;
 
@@ -69,7 +71,7 @@ begin
 
   dlgTasks := TTask.Create(ShowError);
   dlgTasks.Start;
-{$ENDIF}
+{$IFEND}
 end;
 
 procedure TForm1.btnWarningClick(Sender: TObject);
@@ -79,9 +81,9 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  {$IF CompilerVersion < 21}
+  {$IF CompilerVersion < 28}
   btnShowAll.Visible := False;
-  {$ENDIF}
+  {$IFEND}
 end;
 
 procedure TForm1.ShowConfirmation;
