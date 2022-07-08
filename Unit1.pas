@@ -3,8 +3,13 @@ unit Unit1;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  {$IF CompilerVersion <= 22}
+  Windows, Messages, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, StdCtrls;
+  {$ELSE}
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Classes, Controls, StdCtrls;
+  {$IFEND}
 
 type
   TForm1 = class(TForm)
@@ -33,8 +38,10 @@ implementation
 
 {$R *.dfm}
 
+{$IF CompilerVersion >= 28}
 uses
   System.Threading;
+{$IFEND}
 
 procedure TForm1.btnConfirmClick(Sender: TObject);
 begin
@@ -52,12 +59,12 @@ begin
 end;
 
 procedure TForm1.btnShowAllClick(Sender: TObject);
-{$IF CompilerVersion >= 21}
+{$IF CompilerVersion >= 28}
 var
   dlgTasks: ITask;
-{$ENDIF}
+{$IFEND}
 begin
-{$IF CompilerVersion >= 21}
+{$IF CompilerVersion >= 28}
   dlgTasks := TTask.Create(ShowInformation);
   dlgTasks.Start;
 
@@ -69,7 +76,7 @@ begin
 
   dlgTasks := TTask.Create(ShowError);
   dlgTasks.Start;
-{$ENDIF}
+{$IFEND}
 end;
 
 procedure TForm1.btnWarningClick(Sender: TObject);
@@ -79,9 +86,9 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  {$IF CompilerVersion < 21}
+  {$IF CompilerVersion < 28}
   btnShowAll.Visible := False;
-  {$ENDIF}
+  {$IFEND}
 end;
 
 procedure TForm1.ShowConfirmation;
